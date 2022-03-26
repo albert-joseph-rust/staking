@@ -51,7 +51,7 @@ export default function Homepage() {
       await SimpleStakingContract.stake(account, amount);
       toast.success("You staked Tokens successfully!");
       setAmount(0);
-      fecthData();
+      fetchData();
       setApproved(true);
     } catch (error) {
       console.log(error);
