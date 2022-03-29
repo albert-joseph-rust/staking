@@ -41,16 +41,10 @@ export default function MainNavbar() {
   return (
     <AppBar
       position="static"
-      sx={{ background: "transparent", boxShadow: "none" }}
+      sx={{ background: "transparent", boxShadow: "none", padding:"0px" }}
     >
-      <ToolbarStyle disableGutters>
-        <Container
-          maxWidth="xl"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
+      <ToolbarStyle disableGutters sx={{ padding: "0px" }}>
+        <Container sx={{ display: "flex", alignItems: "center", minWidth:"100%", padding: "0px"}}>
           <Hidden mdDown>
             <MenuDesktop />
           </Hidden>

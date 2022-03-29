@@ -11,10 +11,8 @@ export default function MainLayout() {
     <>
       <Box>
         <MainNavbar />
-        <Box>
           <Outlet />
-        </Box>
-        <MainFooter />
+        {/* <MainFooter /> */}
       </Box>
     </>
   );

@@ -2,14 +2,6 @@ import { Button, Box, Stack, Typography, Hidden } from "@mui/material";
 import { useEthers, useEtherBalance, useTokenBalance } from "@usedapp/core";
 import { ethers } from "ethers";
 
-// export function BusdBalance() {
-//   const { account } = useEthers();
-//   const busdBalanceBigNumber = useTokenBalance(BusdAddress, account);
-//   const busdBalance =
-//     busdBalanceBigNumber && ethers.utils.formatUnits(busdBalanceBigNumber, 18);
-//   return busdBalance;
-// }
-
 export default function ConnectButton({ sx }) {
   const { activateBrowserWallet, deactivate, account } = useEthers();
   const balance = useEtherBalance(account);
@@ -20,7 +12,6 @@ export default function ConnectButton({ sx }) {
         <>
           <Stack
             sx={{
-              background: "linear-gradient(270deg,#ff9dff,#00fbf5)",
               padding: "2px",
             }}
           >
@@ -28,12 +19,9 @@ export default function ConnectButton({ sx }) {
               variant="outlined"
               onClick={deactivate}
               color="warning"
-              // startIcon={
-              //   <Box component="img" src="/metamask.png" sx={{ width: 20 }} />
-              // }
               sx={{
                 background: "linear-gradient(90deg,#7f18bb,#35249b)",
-                borderRadius: 0,
+                borderRadius: 3,
                 color: "white",
                 px: 2,
                 py: 1,
@@ -47,7 +35,6 @@ export default function ConnectButton({ sx }) {
       ) : (
         <Stack
           sx={{
-            background: "linear-gradient(270deg,#ff9dff,#00fbf5)",
             padding: "2px",
           }}
         >
@@ -55,12 +42,9 @@ export default function ConnectButton({ sx }) {
             variant="outlined"
             color="warning"
             onClick={activateBrowserWallet}
-            // startIcon={
-            //   <Box component="img" src="/metamask.png" sx={{ width: 20 }} />
-            // }
             sx={{
               background: "linear-gradient(90deg,#7f18bb,#35249b)",
-              borderRadius: 0,
+              borderRadius: 3,
               color: "white",
               px: 2,
               py: 1,

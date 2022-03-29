@@ -9,8 +9,12 @@ export default function MainFooter() {
     <Stack
       textAlign="center"
       sx={{
-        pb: 2,
-        py: 8,
+        width: "100%",
+        py: 2,
+        borderTop: "2px solid #dfc15e",
+        // position: "absolute",
+        // bottom: 0,
+        // zIndex: 100
       }}
     >
       <Container maxWidth="lg">

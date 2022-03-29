@@ -12,7 +12,7 @@ export const StakeAddress = "0x6626bda9c85d722ced4041660b0fbd3bfb37bff2";
 // export const StakeAddress = "0x8850Fff101a5A23996656975cEA6FDbE76Cf835a";
 
 //Test Address
-export const SimpleStakingAddress = "0x3A1aBfE41879245Dce46fFF2D38881cD0a14Cd60";
+export const SimpleStakingAddress = "0x18AA4796c087d15E66ab22167C65E1a32655B9c8";
 export const MTWTokenAddress = "0x4E24837A80E3b6345d5df843e84F42875F025121";
 export const MTWkeyTokenAddress = "0x6f2C5b856CEa3D28FbEe91A3e6c8fdEa36E2FBb9";
 

@@ -46,8 +46,8 @@ export default function MainNavbar() {
       direction="row"
       justifyContent="space-between"
       alignItems="center"
-      spacing={5}
-      sx={{ width: 1, position: "relative" }}
+      spacing={0}
+      sx={{ width: "100%", position: "relative", borderBottom: "2px solid #dfc15e", padding:"10px", marginBottom: "10px" }}
     >
       <Stack direction="row" spacing={4}>
         <Logo />
