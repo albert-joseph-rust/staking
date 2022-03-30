@@ -16,13 +16,15 @@ export default function ConnectButton({ sx }) {
             }}
           >
             <Button
+              className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root"
               variant="outlined"
               onClick={deactivate}
               color="warning"
               sx={{
-                background: "linear-gradient(90deg,#7f18bb,#35249b)",
+                // background: "linear-gradient(90deg,#7f18bb,#35249b)",
+                bgcolor: "#dfc15e",
                 borderRadius: 3,
-                color: "white",
+                color: "black",
                 px: 2,
                 py: 1,
                 ...sx,
@@ -39,13 +41,15 @@ export default function ConnectButton({ sx }) {
           }}
         >
           <Button
+            className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root"
             variant="outlined"
             color="warning"
             onClick={activateBrowserWallet}
             sx={{
-              background: "linear-gradient(90deg,#7f18bb,#35249b)",
+              // background: "linear-gradient(90deg,#7f18bb,#35249b)",
+              bgcolor: "#dfc15e",
               borderRadius: 3,
-              color: "white",
+              color: "black",
               px: 2,
               py: 1,
               ...sx,

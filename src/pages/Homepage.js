@@ -47,7 +47,6 @@ export default function Homepage() {
 
   const handleApprove = async () => {
     console.log("MTWTokenContract=>", MTWTokenContract)
-    console.log("SimpleStakingAddress=>", SimpleStakingAddress)
     try {
       await MTWTokenContract.approve(SimpleStakingAddress, ethers.constants.MaxUint256);
       toast.success("Approved successfully!");
@@ -286,6 +285,20 @@ export default function Homepage() {
             
           </Stack>
         ))}
+        <Stack flex={1} alignItems="center" sx={{ bgcolor: "black", p: 4, color: "#dfc15e", borderRadius: 2, width: "65%", margin: "auto", border: "1px solid #dfc15e" }}>
+          <Typography variant="title" color="#4b5563">
+            MetaKey: A Key to Metaverse
+          </Typography>
+          <Typography variant="h3" color="#4b5563">
+            Stake MTW: Earn MetaKey
+          </Typography>
+          <Typography variant="h3" color="#4b5563">
+            One MetaKey: One Land
+          </Typography>
+          <Typography variant="h3" color="#4b5563">
+            One Land : 100 MTW
+          </Typography>
+        </Stack>
       </Stack>
     </Container>
   );

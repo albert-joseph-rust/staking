@@ -51,6 +51,8 @@ export function useMTWTokenContract(withSignerIfPossible = true) {
   return useContract(MTWTokenAddress, MTWTokenAbi, withSignerIfPossible);
 }
 
+
+
 export function useSimpleStakingContract(withSignerIfPossible = true) {
   return useContract(SimpleStakingAddress, SimpleStakingAbi, withSignerIfPossible);
 }

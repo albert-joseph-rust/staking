@@ -52,6 +52,11 @@ export default function MainNavbar() {
       <Stack direction="row" spacing={4}>
         <Logo />
       </Stack>
+      <Stack>
+          <Typography variant="title" color="#dfc15e">
+            Stacking
+          </Typography>
+      </Stack>
       <ConnectButton />
     </Stack>
   );
