@@ -202,7 +202,7 @@ export default function MenuMobile({ isOffset, isHome }) {
           <Link component={RouterLink} to="/" sx={{ display: "inline-flex", my: 2, ml: 5 }}>
             <Logo/>
           </Link>
-          <List disablePadding>
+          {/* <List disablePadding>
             {menuConfig.map((link) => (
               <MenuMobileItem
                 key={link.title}
@@ -212,7 +212,7 @@ export default function MenuMobile({ isOffset, isHome }) {
                 isActive={pathname === link.path}
               />
             ))}
-          </List>
+          </List> */}
         </Scrollbar>
       </Drawer>
     </>

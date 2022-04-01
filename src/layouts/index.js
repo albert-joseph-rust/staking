@@ -9,7 +9,7 @@ import MainFooter from "./MainFooter";
 export default function MainLayout() {
   return (
     <>
-      <Box>
+      <Box sx={{ background: 'rgb(64, 64, 64)' }}>
         <MainNavbar />
           <Outlet />
         <MainFooter />

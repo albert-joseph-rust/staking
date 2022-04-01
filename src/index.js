@@ -11,12 +11,7 @@ import App from "./App";
 import { SearchProvider } from "./contexts/SearchContext";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { Provider as ReduxProvider } from "react-redux";
-import {
-  ChainId,
-  DAppProvider,
-  useEtherBalance,
-  useEthers,
-} from "@usedapp/core";
+import { Mainnet, DAppProvider } from '@usedapp/core'
 
 import { store } from "redux/store";
 import { BrowserRouter } from "react-router-dom";
@@ -24,8 +19,11 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import { ToastContainer } from "react-toastify";
 
 const config = {
-  // readOnlyChainId: ChainId.BSCTestnet,
-};
+  readOnlyChainId: Mainnet.chainId,
+  readOnlyUrls: {
+    [Mainnet.chainId]: 'https://mainnet.infura.io/v3/14a0951f47e646c1b241aa533e150219',
+  },
+}
 
 
 ReactDOM.render(

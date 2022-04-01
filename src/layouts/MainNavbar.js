@@ -41,7 +41,7 @@ export default function MainNavbar() {
   return (
     <AppBar
       position="static"
-      sx={{ background: "transparent", boxShadow: "none", padding:"0px" }}
+      sx={{ background: '#151513', boxShadow: "none", padding:"0px" }}
     >
       <ToolbarStyle disableGutters sx={{ padding: "0px" }}>
         <Container sx={{ display: "flex", alignItems: "center", minWidth:"100%", padding: "0px"}}>

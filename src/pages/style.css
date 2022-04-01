@@ -8,3 +8,16 @@
 .css-13l2p98-MuiContainer-root{
     padding: 0px !important;
 }
+
+.css-vuxbek-MuiContainer-root{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.css-1wcswa0-MuiStack-root{
+    margin-bottom: 5% !important;
+}
+.slick-slider{
+    width: 85%;
+    text-align: center;
+    padding: 1px;
+}

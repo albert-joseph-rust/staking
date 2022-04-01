@@ -47,16 +47,16 @@ export default function MainNavbar() {
       justifyContent="space-between"
       alignItems="center"
       spacing={0}
-      sx={{ width: "100%", position: "relative", borderBottom: "2px solid #dfc15e", padding:"10px", marginBottom: "10px" }}
+      sx={{ width: "100%", position: "relative", borderBottom: "2px solid #dfc15e", padding:"10px"}}
     >
       <Stack direction="row" spacing={4}>
         <Logo />
       </Stack>
-      <Stack>
-          <Typography variant="title" color="#dfc15e">
-            Stacking
+      {/* <Stack>
+          <Typography variant="h1" color="#dfc15e" sx={{ fontFamily: "'Zen Dots', cursive" }}>
+            METAWORTH STAKING
           </Typography>
-      </Stack>
+      </Stack> */}
       <ConnectButton />
     </Stack>
   );

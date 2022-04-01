@@ -1,11 +1,52 @@
+import {useState, useEffect} from 'react';
 import { Button, Box, Stack, Typography, Hidden } from "@mui/material";
-import { useEthers, useEtherBalance, useTokenBalance } from "@usedapp/core";
+import { useEthers, shortenAddress, useLookupAddress } from '@usedapp/core'
+import WalletConnectProvider from '@walletconnect/web3-provider'
+import Web3Modal from 'web3modal';
 import { ethers } from "ethers";
 
 export default function ConnectButton({ sx }) {
-  const { activateBrowserWallet, deactivate, account } = useEthers();
-  const balance = useEtherBalance(account);
-  const bnbBalance = balance && ethers.utils.formatEther(balance);
+  const { account, activate, deactivate } = useEthers()
+  // const ens = useLookupAddress()
+  const [showModal, setShowModal] = useState(false)
+  const [activateError, setActivateError] = useState('')
+  const { error } = useEthers()
+  useEffect(() => {
+    if (error) {
+      setActivateError(error.message)
+    }
+  }, [error])
+
+  const activateProvider = async () => {
+    const providerOptions = {
+      injected: {
+        display: {
+          name: 'Metamask',
+          description: 'Connect with the provider in your Browser',
+        },
+        package: null,
+      },
+      walletconnect: {
+        package: WalletConnectProvider,
+        options: {
+          bridge: 'https://bridge.walletconnect.org',
+          infuraId: '14a0951f47e646c1b241aa533e150219',
+        },
+      },
+    }
+
+    const web3Modal = new Web3Modal({
+      providerOptions,
+    })
+    try {
+      const provider = await web3Modal.connect()
+      await activate(provider)
+      setActivateError('')
+    } catch (error) {
+      setActivateError(error.message)
+    }
+  }
+
   return (
     <>
       {account ? (
@@ -18,7 +59,7 @@ export default function ConnectButton({ sx }) {
             <Button
               className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root"
               variant="outlined"
-              onClick={deactivate}
+              onClick={() => deactivate()}
               color="warning"
               sx={{
                 // background: "linear-gradient(90deg,#7f18bb,#35249b)",
@@ -44,7 +85,8 @@ export default function ConnectButton({ sx }) {
             className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root"
             variant="outlined"
             color="warning"
-            onClick={activateBrowserWallet}
+            // onClick={activateBrowserWallet}
+            onClick={activateProvider}
             sx={{
               // background: "linear-gradient(90deg,#7f18bb,#35249b)",
               bgcolor: "#dfc15e",
@@ -59,6 +101,7 @@ export default function ConnectButton({ sx }) {
           </Button>
         </Stack>
       )}
+
     </>
   );
 }

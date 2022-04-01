@@ -23,22 +23,6 @@ export default function Router() {
       element: <MainLayout />,
       children: [
         { path: "/", element: <Homepage /> },
-        // {
-        //   path: "/admin",
-        //   element: (
-        //     <AdminGuard>
-        //       <Adminpage />
-        //     </AdminGuard>
-        //   ),
-        // },
-        // {
-        //   path: "/adminrolepage",
-        //   element: (
-        //     <Admin2Guard>
-        //       <Devpage />
-        //     </Admin2Guard>
-        //   ),
-        // },
       ],
     },
   ]);
