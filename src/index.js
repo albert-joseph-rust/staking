@@ -18,28 +18,37 @@ import { BrowserRouter } from "react-router-dom";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import { ToastContainer } from "react-toastify";
 
-const config = {
-  readOnlyChainId: Mainnet.chainId,
-  readOnlyUrls: {
-    [Mainnet.chainId]: 'https://mainnet.infura.io/v3/14a0951f47e646c1b241aa533e150219',
-  },
-}
+import { createWeb3ReactRoot, Web3ReactProvider } from "@web3-react/core";
+import { ChakraProvider } from "@chakra-ui/react";
+import { ethers } from "ethers";
+import getLibrary from "./utils/getLibrary";
+import Web3ReactManager from 'components/Web3ReactManager';
+import { NetworkContextName } from './constants';
 
+const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName);
 
 ReactDOM.render(
   <StrictMode>
-    <DAppProvider config={config}>
+    {/* <DAppProvider config={config}> */}
       <SearchProvider>
         <ReduxProvider store={store}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <BrowserRouter>
-              <App />
+              <ChakraProvider>
+                <Web3ReactProvider getLibrary={getLibrary}>
+                    <Web3ProviderNetwork getLibrary={getLibrary}>
+                      <Web3ReactManager>
+                        <App />
+                      </Web3ReactManager>
+                    </Web3ProviderNetwork>
+                </Web3ReactProvider>
+              </ChakraProvider>
               <ToastContainer />
             </BrowserRouter>
           </LocalizationProvider>
         </ReduxProvider>
       </SearchProvider>
-    </DAppProvider>
+    {/* </DAppProvider> */}
   </StrictMode>,
   document.getElementById("root")
 );

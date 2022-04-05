@@ -6,24 +6,16 @@ const ICON_SIZE = {
 
 const menuConfig = [
   {
-    title: "About",
-    path: "about",
+    title: "Homepage",
+    path: "https://metaworth.exchange",
   },
   {
-    title: "Features",
-    path: "feature",
+    title: "Swap",
+    path: "https://app.metaworth.exchange",
   },
   {
-    title: "Roadmap",
-    path: "roadmap",
-  },
-  {
-    title: "Team",
-    path: "team",
-  },
-  {
-    title: "Faq",
-    path: "faq",
+    title: "Document",
+    path: "https://metaworth.exchange/document/",
   },
 ];
 

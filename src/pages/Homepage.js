@@ -8,17 +8,24 @@ import { MTWTokenAddress, SimpleStakingAddress } from "contracts/address";
 import bgContent from "../assets/img/sec2-bg.jpg";
 import bgTitle from "../assets/img/sec-title-bg.jpg";
 import bgBoby from "../assets/img/sec-content-bg.jpg";
+import { useWeb3React } from "@web3-react/core";
 import "./style.css";
-// import "~slick-carousel/slick/slick.css"; 
-// import "~slick-carousel/slick/slick-theme.css";
 
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 
 export default function Homepage() {
-  const { account } = useEthers();
-  console.log(account)
+  // const { account } = useEthers();
+  const {
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active
+  } = useWeb3React();
+  console.log(account);
 
   const [stakedTokens, setStakedTokens] = useState(0);
   const [unStakedTokens, setUnstakedTokens] = useState(0);
@@ -42,7 +49,9 @@ export default function Homepage() {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1, 
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
   };
 
   const MTWTokenContract = useMTWTokenContract();
@@ -65,7 +74,8 @@ export default function Homepage() {
 
   const handleApprove = async () => {
     console.log("MTWTokenContract=>", MTWTokenContract)
-    try {
+    try {      
+
       await MTWTokenContract.approve(SimpleStakingAddress, ethers.constants.MaxUint256);
       toast.success("Approved successfully!");
       fetchData();
@@ -187,7 +197,7 @@ export default function Homepage() {
         <Box component="img" src={bgTitle} alt="" style={{ width: "100%", height: "300px" }}/>
         <Box position="absolute" width="100%" top={30}>
           <Stack alignItems="center">
-              <Typography variant="title" color="#dfc15e" sx={{ fontSize: { sm: 36, md: 48, lg: 56, xl: 68 } }}>
+              <Typography variant="title" color="#dfc15e" sx={{ fontSize: { sm: 36, md: 48, lg: 56, xl: 68 }, fontFamily: "'Contrail One', sans-serif" }}>
                 Metaworth Staking
               </Typography>
           </Stack>
@@ -241,8 +251,8 @@ export default function Homepage() {
                   </FormControl>
                   <Stack id="overlay" justifyContent="center" alignItems="center" sx={{ width: 1, height: 1, transition: "all 0.5s", }}>
                     <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                      <Button variant="contained" className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" sx={{ bgcolor: "#dfc15e", color: "black" }} onClick={() => handleStake(account, Number(amount), Number(periodType))} >
-                        Stake
+                      <Button variant="contained" className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" sx={{ bgcolor: "#dfc15e", color: "#574713", fontFamily: "'Roboto', sans-serif", borderRadius: 10 }} onClick={() => handleStake(account, Number(amount), Number(periodType))} >
+                        STAKE
                       </Button>
                     </ButtonGroup>
                   </Stack>
@@ -254,8 +264,8 @@ export default function Homepage() {
         ) : (
           <Stack alignItems="center" sx={{ mt: 10, bgcolor: "rgba(0,0,0,0.8)", p: 4, color: "#dfc15e", borderRadius: 2, width: "85%", margin: "auto", border: "1px solid #dfc15e" }} spacing={3}>
             <Typography variant="h3" sx={{ marginBottom:"80px" }}>Please approve to stake Tokens!</Typography>
-            <Button className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" size="large" variant="contained" onClick={handleApprove} sx={{ bgcolor:"#dfc15e", color:"black" }}>
-              Approve
+            <Button className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" size="large" variant="contained" onClick={handleApprove} sx={{ bgcolor:"#dfc15e", color:"#574713", fontFamily: "'Roboto', sans-serif", borderRadius: 10 }}>
+              APPROVE
             </Button>
           </Stack>
         )}
@@ -276,14 +286,14 @@ export default function Homepage() {
               <Typography color="#4b5563">( 1 MTWkey: 1000MTW / 90 Days )</Typography>
               {(((parseInt(stakeresultrow.periodType.toString())*1000) - (currentTime - (stakeresultrow.claimTime.length==0 ? parseInt(stakeresultrow.beginTime.toString()):parseInt(stakeresultrow.claimTime[stakeresultrow.claimTime.length-1]?.toString()))))/(1000*60)) < 0 ? (
                   <ButtonGroup variant="contained" sx={{ mt: 2 }} aria-label="outlined primary button group">
-                    <Button variant="contained" onClick={() => handleClaim(idx)} className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" sx={{ bgcolor:"#dfc15e", color: 'black' }}>
-                      Claim
+                    <Button variant="contained" onClick={() => handleClaim(idx)} className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" sx={{ bgcolor:"#dfc15e", color:"#574713", fontFamily: "'Roboto', sans-serif", borderRadius: 10 }}>
+                      CLAIM
                     </Button>
                   </ButtonGroup>
                 ): null }
                 {stakeresultrow.claimRewardAmount != 0 ? (
-                  <Button variant="contained" onClick={() => handleUnstake(idx)} className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" sx={{ bgcolor:"#dfc15e", color: 'black', mt: 5 }}>
-                    UnStake
+                  <Button variant="contained" onClick={() => handleUnstake(idx)} className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" sx={{ bgcolor:"#dfc15e", color:"#574713", fontFamily: "'Roboto', sans-serif", borderRadius: 10, mt: 5 }}>
+                    UNSTAKE
                   </Button>
                 ):null}    
             </Stack>
@@ -327,7 +337,7 @@ export default function Homepage() {
                 <TextField fullWidth id="outlined-basic" label="Put in Withdraw Amount" variant="outlined" onChange={handlewithdrawAmount} value={withdrawamount} />
               <Stack id="overlay" justifyContent="center" alignItems="center" sx={{ width: 1, height: 1, transition: "all 0.5s", }}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                  <Button variant="contained" className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" sx={{ bgcolor: "#dfc15e", color: "black", margin: "20px" }} onClick={() => handleWithdraw(account, withdrawamount)} >
+                  <Button variant="contained" className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root" sx={{ bgcolor: "#dfc15e", color:"#574713", fontFamily: "'Roboto', sans-serif", borderRadius: 10, margin: "20px" }} onClick={() => handleWithdraw(account, withdrawamount)} >
                     Withdraw
                   </Button>
                 </ButtonGroup>

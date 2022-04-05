@@ -1,52 +1,44 @@
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Button, Box, Stack, Typography, Hidden } from "@mui/material";
 import { useEthers, shortenAddress, useLookupAddress } from '@usedapp/core'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import Web3Modal from 'web3modal';
 import { ethers } from "ethers";
 
+import { useDisclosure } from "@chakra-ui/react";
+import SelectWalletModal from "./Modal";
+import { connectors } from "./Connectors";
+import { useWeb3React } from "@web3-react/core";
+
 export default function ConnectButton({ sx }) {
-  const { account, activate, deactivate } = useEthers()
-  // const ens = useLookupAddress()
-  const [showModal, setShowModal] = useState(false)
-  const [activateError, setActivateError] = useState('')
-  const { error } = useEthers()
+  const {
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active
+  } = useWeb3React();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const disconnect = () => {
+    localStorage.removeItem("provider");
+    refreshState();
+    deactivate();
+  };
+
+  const refreshState = () => {
+    window.localStorage.setItem("provider", undefined);
+    // localStorage.removeItem("provider");
+  };
+
   useEffect(() => {
-    if (error) {
-      setActivateError(error.message)
-    }
-  }, [error])
+    const provider = window.localStorage.getItem("provider");
+    if (provider) activate(connectors[provider]);
+  }, []);
 
-  const activateProvider = async () => {
-    const providerOptions = {
-      injected: {
-        display: {
-          name: 'Metamask',
-          description: 'Connect with the provider in your Browser',
-        },
-        package: null,
-      },
-      walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          bridge: 'https://bridge.walletconnect.org',
-          infuraId: '14a0951f47e646c1b241aa533e150219',
-        },
-      },
-    }
-
-    const web3Modal = new Web3Modal({
-      providerOptions,
-    })
-    try {
-      const provider = await web3Modal.connect()
-      await activate(provider)
-      setActivateError('')
-    } catch (error) {
-      setActivateError(error.message)
-    }
-  }
-
+  
   return (
     <>
       {account ? (
@@ -59,10 +51,9 @@ export default function ConnectButton({ sx }) {
             <Button
               className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root"
               variant="outlined"
-              onClick={() => deactivate()}
+              onClick={disconnect}
               color="warning"
               sx={{
-                // background: "linear-gradient(90deg,#7f18bb,#35249b)",
                 bgcolor: "#dfc15e",
                 borderRadius: 3,
                 color: "black",
@@ -85,10 +76,8 @@ export default function ConnectButton({ sx }) {
             className="css-1ew3bh9-MuiButtonBase-root-MuiButton-root"
             variant="outlined"
             color="warning"
-            // onClick={activateBrowserWallet}
-            onClick={activateProvider}
+            onClick={onOpen}
             sx={{
-              // background: "linear-gradient(90deg,#7f18bb,#35249b)",
               bgcolor: "#dfc15e",
               borderRadius: 3,
               color: "black",
@@ -101,7 +90,7 @@ export default function ConnectButton({ sx }) {
           </Button>
         </Stack>
       )}
-
+      <SelectWalletModal isOpen={isOpen} closeModal={onClose} />
     </>
   );
 }

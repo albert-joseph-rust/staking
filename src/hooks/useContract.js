@@ -14,10 +14,21 @@ import { PirateAddress, StakeAddress } from "contracts/address";
 
 import { MTWkeyTokenAddress, MTWTokenAddress, SimpleStakingAddress } from "contracts/address";
 
+import { useWeb3React } from "@web3-react/core";
+
 // returns null on errors
 function useContract(address, ABI, withSignerIfPossible = true) {
-  const { library, account } = useActiveWeb3React();
+  // const { library, account } = useActiveWeb3React();
+
   // const { library, account } = useEthers();
+  const {
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active
+  } = useWeb3React();
 
   return useMemo(() => {
     if (!address || !ABI || !library) return null;

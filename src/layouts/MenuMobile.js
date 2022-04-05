@@ -125,11 +125,13 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
   }
 
   return (
-    <ListItemStyle
+    <a
       key={title}
-      to={path}
-      component={RouterLink}
-      sx={{
+      href={path}
+      // component={RouterLink}
+      target="_blank"
+      style={{
+        textDecoration: "none",
         ...(isActive && {
           // color: "primary.main",
           bgcolor: (theme) =>
@@ -140,10 +142,10 @@ function MenuMobileItem({ item, isOpen, isActive, onOpen }) {
         }),
       }}
     >
-      <ScrollLink to={item.path} spy smooth onClick={onOpen}>
+      {/* <ScrollLink to={item.path} spy smooth onClick={onOpen}> */}
         <ListItemText sx={{ color: "white", px: 3 }} primary={item.title} />
-      </ScrollLink>
-    </ListItemStyle>
+      {/* </ScrollLink> */}
+    </a>
   );
 }
 
@@ -202,7 +204,7 @@ export default function MenuMobile({ isOffset, isHome }) {
           <Link component={RouterLink} to="/" sx={{ display: "inline-flex", my: 2, ml: 5 }}>
             <Logo/>
           </Link>
-          {/* <List disablePadding>
+          <List disablePadding>
             {menuConfig.map((link) => (
               <MenuMobileItem
                 key={link.title}
@@ -212,7 +214,7 @@ export default function MenuMobile({ isOffset, isHome }) {
                 isActive={pathname === link.path}
               />
             ))}
-          </List> */}
+          </List>
         </Scrollbar>
       </Drawer>
     </>
